@@ -22,6 +22,11 @@ include "includes/navigation.php";
 
             <div class="col-md-8">
 
+            <?php 
+            
+            $query = "SELECT * FROM posts";
+            ?>
+
                 <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
