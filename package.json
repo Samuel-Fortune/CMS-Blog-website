@@ -1,5 +1,33 @@
+
+
 {
+  "name": "cms2-blog-website",
+  "version": "1.0.0",
+  "description": "cms2 blog website",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "npx tailwindcss -i ./src/dist/style.css -o ./src/dist/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samuel-Fortune/CMS-Blog-website"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samuel-Fortune/CMS-Blog-website/issues"
+  },
+  "homepage": "https://github.com/Samuel-Fortune/CMS-Blog-website#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  },
   "dependencies": {
+    "jquery": "^3.6.1",
+    "once": "^1.4.0",
     "bootstrap": "^5.2.3"
   }
+
+  
 }
+
