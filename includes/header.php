@@ -25,15 +25,16 @@
       referrerpolicy="no-referrer"
     />
 
-    
+
 
     <!-- Bootstrap Core CSS -->
-    <link href="/cms2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/cms2/CMS-Blog-website/admin/css/bootstrap.min.css" rel="stylesheet">
+    
 
     <!-- Custom CSS -->
-    <link href="/cms2/css/blog-home.css" rel="stylesheet">
+    <link href="/cms2/CMS-Blog-website/css/blog-home.css" rel="stylesheet">
 
-    <link href="/cms2/css/styles.css" rel="stylesheet">
+    <link href="/cms2/CMS-Blog-website/css/styles.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
