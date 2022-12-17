@@ -11,8 +11,8 @@
 
     <title>Blog Home - Start Bootstrap Template</title>
 
-     <!--Font-awesome-->
-     <link
+    <!--Font-awesome-->
+    <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
       rel="stylesheet"
     />
