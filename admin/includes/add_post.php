@@ -1,5 +1,12 @@
 <?php
 if (isset($_POST['create_post'])) {
+    $conn = $connection;
+    foreach ($_POST as $postKey => $postval) {
+        if ($postKey !== 'create_post') {
+            $_POST[$postKey] = strip_tags($postval);
+            $_POST[$postKey] = mysqli_real_escape_string($conn, $postval);
+        }
+    }
     $post_title = $_POST['title'];
     $post_author = $_POST['author'];
     $post_category_id = $_POST['post_category_id'];
@@ -12,6 +19,29 @@ if (isset($_POST['create_post'])) {
     $post_comment_count = 4;
 
     move_uploaded_file($post_image_temp, "../images/$post_image");
+
+    if ($smtp = $conn->prepare("INSERT INTO posts(
+        post_category_id,
+        post_title,
+        post_author,
+        post_date,
+        post_image,
+        post_content,
+        post_tags,
+        post_comment_count,
+        post_status)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) ")) {
+        $smtp->bind_param("issssssis", $post_category_id, $post_title, $post_author, $post_date, $post_image, $post_content, $post_tags, $post_comment_count, $post_status);
+
+        if ($smtp->execute()) {
+            confirmQuery(true);
+        } else {
+            die('An Error Occurred In Executing the query');
+        }
+
+        // close connection
+        $smtp->close();
+    }
 
 }
 
