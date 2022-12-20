@@ -6,9 +6,7 @@ function confirmQuery($result)
     if (!$result) {
         die("QUERY FAILED" . mysqli_error($connection));
 
-    } else {
-        echo "POST CREATED";
-    }
+    } 
 }
 
 function insert_categories()
