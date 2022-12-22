@@ -15,6 +15,8 @@
                                     <th>Comments</th>
                                     <th>Comments count</th>
                                     <th>Dates</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
 
                             </thead>
@@ -77,6 +79,7 @@ if (isset($_GET['delete'])) {
 
     $query = "DELETE FROM posts WHERE post_id = $the_post_id ";
     $delete_query = mysqli_query($connection, $query);
+    header("Location: posts.php");
 
 }
 ?>
