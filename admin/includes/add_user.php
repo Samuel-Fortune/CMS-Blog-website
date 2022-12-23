@@ -1,45 +1,24 @@
 <?php
-if (isset($_POST['create_post'])) {
-    $conn = $connection;
-    foreach ($_POST as $postKey => $postval) {
-        if ($postKey !== 'create_post') {
-            $_POST[$postKey] = strip_tags($postval);
-            $_POST[$postKey] = mysqli_real_escape_string($conn, $postval);
-        }
-    }
-    $post_title = $_POST['title'];
-    $post_author = $_POST['author'];
-    $post_category_id = $_POST['post_category'];
-    $post_status = $_POST['post_status'];
-    $post_image = $_FILES['image']['name'];
-    $post_image_temp = $_FILES['image']['tmp_name'];
-    $post_tags = $_POST['post_tags'];
-    $post_content = $_POST['post_content'];
-    $post_date = date('d-m-y');
+if (isset($_POST['create_user'])) {
 
-    move_uploaded_file($post_image_temp, "../images/$post_image");
+    $user_firstname = $_POST['user_firstname'];
+    $user_lastname = $_POST['user_lastname'];
+    $user_role = $_POST['user_role'];
+    $username = $_POST['username'];
+    $user_email = $_POST['user_email'];
+    $user_password = $_POST['user_password'];
 
-    if ($smtp = $conn->prepare("INSERT INTO posts(
-        post_category_id,
-        post_title,
-        post_author,
-        post_date,
-        post_image,
-        post_content,
-        post_tags,
-        post_status)
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) ")) {
-        $smtp->bind_param("issssssis", $post_category_id, $post_title, $post_author, $post_date, $post_image, $post_content, $post_tags, $post_status);
+    $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
 
-        if ($smtp->execute()) {
-            confirmQuery(true);
-        } else {
-            die('An Error Occurred In Executing the query');
-        }
+    $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username,user_email, user_password) ";
 
-        // close connection
-        $smtp->close();
-    }
+    $query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}', '{$user_password}') ";
+
+    $create_user_query = mysqli_query($connection, $query);
+
+    confirmQuery($create_user_query);
+
+    echo "User Created: " . " " . "<a href='users.php'>View Users</a> ";
 
 }
 
@@ -47,70 +26,48 @@ if (isset($_POST['create_post'])) {
 
 <form action="" method="post" enctype="multipart/form-data">
 
-    <div class="form-group">
-        <label for="title"> Post Title</label>
-        <input type="text" class="form-control" name="title">
+<div class="form-group">
+        <label for="title">Firstname</label>
+        <input type="text" class="form-control" name="user_firstname" >
     </div>
 
     <div class="form-group">
-       <select name="post_category" id="post_category">
+        <label for="post_status">Lastname</label>
+        <input type="text" class="form-control" name="user_lastname" >
+    </div>
 
-            <?php
+    <div class="form-group">
+       <select name="user_role" id="user_role">
 
-$query = "SELECT * FROM categories";
-
-$select_categories = mysqli_query($connection, $query);
-
-confirmQuery($select_categories);
-
-while ($row = mysqli_fetch_assoc($select_categories)) {
-    $cat_id = $row['cat_id'];
-    $cat_title = $row['cat_title'];
-
-    if ($cat_id == $post_category_id) {
-
-        echo "<option selected value='{$cat_id}'>{$cat_title}</option>";
-
-    } else {
-
-        echo "<option value='{$cat_id}'>{$cat_title}</option>";
-
-    }
-
-}
-
-?>
+            <option value="subscriber">Select Option</option>
+            <option value="admin">Admin</option>
+            <option value="subscriber">Subscriber</option>
 
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="title">Post Author</label>
-        <input type="text" class="form-control" name="author" >
-    </div>
-
-    <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status" >
-    </div>
-
-    <div class="form-group">
+    <!--<div class="form-group">
         <label for="post_image">Post Image</label>
         <input type="file"  name="image" >
+    </div>-->
+
+    <div class="form-group">
+        <label for="post_tags">Username</label>
+        <input type="text" class="form-control" name="username" >
     </div>
 
     <div class="form-group">
-        <label for="post_tags">Post Tags</label>
-        <input type="text" class="form-control" name="post_tags" >
+        <label for="post_content">Email</label>
+        <input type="email" name="user_email" class="form-control" >
     </div>
 
     <div class="form-group">
-        <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"></textarea>
+        <label for="post_content">Password</label>
+        <input type="password" name="user_password" class="form-control" >
     </div>
 
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" name="create_post" value="Publish Post">
+        <input class="btn btn-primary" type="submit" name="create_user" value="Add user">
     </div>
 
 </form>
