@@ -10,16 +10,16 @@
 
 
 
-//if(isset($_SESSION['username'])) {
+if(isset($_SESSION['username'])) {
 
 
 
-//} else {
+} else {
 
-//header("location: ../index.php");
+header("location: ../index.php");
 
 
-//}
+}
 
 
 
