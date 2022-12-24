@@ -1,6 +1,32 @@
 <?php ob_start(); ?>
-<?php include "../includes/db.php"; ?>
+<?php include "../includes/db.php";?>
 <?php include "functions.php";?>
+
+
+<?php session_start(); ?>
+
+<?php 
+
+
+
+
+//if(isset($_SESSION['username'])) {
+
+
+
+//} else {
+
+//header("location: ../index.php");
+
+
+//}
+
+
+
+
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

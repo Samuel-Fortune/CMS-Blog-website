@@ -1,5 +1,7 @@
 <?php
 include "includes/admin_header.php";
+if (session_status() == PHP_SESSION_NONE) session_start();
+
 ?>
     <div id="wrapper">
 
@@ -18,8 +20,9 @@ include "includes/admin_navigation.php";
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            WELCOME TO ADMIN
-                            <small>Author</small>
+                            Welcome to admin
+
+                            <small> <?php echo $_SESSION['username'] ?></small>
                         </h1>
 
 
