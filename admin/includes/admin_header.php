@@ -1,30 +1,32 @@
-<?php ob_start(); ?>
+<?php ob_start();?>
 <?php include "../includes/db.php";?>
 <?php include "functions.php";?>
 
+<?php session_start();?>
 
-<?php session_start(); ?>
+<?php
 
-<?php 
-
-
-
-
-if(isset($_SESSION['username'])) {
-
-
+if (isset($_SESSION['username'])) {
 
 } else {
 
-header("location: ../index.php");
+    header("location: ../index.php");
 
+}
+?>
+
+<?php
+if (!isset($_SESSION['user_role'])) {
+
+    header("Location: ../index.php");
 
 }
 
+if ($_SESSION['user_role'] !== 'admin') {
+    header("Location: ../index.php");
 
-
-
- ?>
+}
+?>
 
 
 <!DOCTYPE html>
