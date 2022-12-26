@@ -28,8 +28,8 @@ if (isset($_POST['create_post'])) {
         post_content,
         post_tags,
         post_status)
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) ")) {
-        $smtp->bind_param("issssssis", $post_category_id, $post_title, $post_author, $post_date, $post_image, $post_content, $post_tags, $post_status);
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?) ")) {
+        $smtp->bind_param("isssssss", $post_category_id, $post_title, $post_author, $post_date, $post_image, $post_content, $post_tags, $post_status);
 
         if ($smtp->execute()) {
             confirmQuery(true);
