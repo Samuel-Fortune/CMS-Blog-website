@@ -67,6 +67,7 @@ if (isset($_POST['update_post'])) {
     $update_post = mysqli_query($connection, $query);
 
     confirmQuery($update_post);
+    echo "<p class='bg-success'>Post Updated. <a href='../post.php?p_id={$the_post_id}'>View post</a> or <a href='posts.php'>Edit more post</a> </p>";
 
 }
 ?>
@@ -116,8 +117,19 @@ while ($row = mysqli_fetch_assoc($select_categories)) {
     </div>
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input value="<?php echo $data['post_status']; ?>" type="text" class="form-control" name="post_status" >
+        <select name="post_status" id="">
+            <option value='<?php echo $data['post_status']; ?>'><?php echo $data['post_status']; ?></option>
+            <?php
+if ($data['post_status'] == 'published') {
+    echo "<option value='draft'>Draft</option>";
+
+} else {
+    echo "<option value='published'>Publish</option>";
+}
+
+?>
+
+        </select>
     </div>
 
     <div class="form-group">
@@ -133,8 +145,8 @@ while ($row = mysqli_fetch_assoc($select_categories)) {
     </div>
 
     <div class="form-group">
-        <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"><?php echo $data['post_content']; ?></textarea>
+        <label for="summernote">Post Content</label>
+        <textarea class="form-control" name="post_content" id="summernote" cols="30" rows="10"><?php echo $data['post_content']; ?></textarea>
     </div>
 
     <div class="form-group">

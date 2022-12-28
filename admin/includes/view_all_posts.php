@@ -1,3 +1,4 @@
+<form action="" method="post">
 <table class="table table-bordered table-hover">
                             <thead>
 
@@ -69,9 +70,10 @@ while ($row = mysqli_fetch_assoc($select_posts)) {
 
 
 
-                        </tbody>
+                </tbody>
 
-                        </table>
+            </table>
+</form>
                         <?php
 
 if (isset($_GET['delete'])) {

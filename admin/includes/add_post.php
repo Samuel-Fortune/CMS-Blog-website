@@ -31,7 +31,6 @@ if (isset($_POST['create_post'])) {
         VALUES(?, ?, ?, ?, ?, ?, ?, ?) ")) {
         $smtp->bind_param("isssssss", $post_category_id, $post_title, $post_author, $post_date, $post_image, $post_content, $post_tags, $post_status);
 
-        
         if ($smtp->execute()) {
             confirmQuery(true);
         } else {
@@ -106,8 +105,8 @@ while ($row = mysqli_fetch_assoc($select_categories)) {
     </div>
 
     <div class="form-group">
-        <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"></textarea>
+        <label for="summernote">Post Content</label>
+        <textarea class="form-control" name="post_content" id="summernote" cols="30" rows="10"></textarea>
     </div>
 
     <div class="form-group">
