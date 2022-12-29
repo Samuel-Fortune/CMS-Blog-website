@@ -30,19 +30,14 @@ while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
                     </li>
 
                     <?php
-
+if (session_status() == PHP_SESSION_NONE) session_start();
+ 
 if (isset($_SESSION['user_role'])) {
-
-    if (isset($_GET['p_id'])) {
-
-        $the_post_id = $_GET['p_id'];
-
-        echo "<li><a href='/cms2/CMS-Blog-website/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
-
-    }
-
+if (isset($_GET['p_id'])) {
+$the_post_id = $_GET['p_id'];
+echo "<li><a href='/cms2/CMS-Blog-website/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
 }
-
+}
 ?>
 
 
