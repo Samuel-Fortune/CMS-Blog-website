@@ -65,7 +65,7 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
                 <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
                 <hr>
                 <p><?php echo $post_content ?></p>
-                
+
 
                 <hr>
 
@@ -102,8 +102,11 @@ if (isset($_POST['create_comment'])) {
         $query .= "WHERE post_id = $the_post_id ";
 
         $update_comment_count_query = mysqli_query($connection, $query);
-        
 
+    } else {
+
+        echo "<p class='bg-success'>This field's can't be left empty </p>" . mysqli_error($connection);
+        //echo "<script>alert('Field's can't be empty')</script>";
     }
 
 }
