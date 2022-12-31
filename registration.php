@@ -4,9 +4,9 @@
  <?php
 
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = escape($_POST['username']);
+    $email = escape($_POST['email']);
+    $password = escape($_POST['password']);
 
     if (!empty($username) && !empty($email) && !empty($password)) {
 
@@ -14,17 +14,19 @@ if (isset($_POST['submit'])) {
         $email = mysqli_real_escape_string($connection, $email);
         $password = mysqli_real_escape_string($connection, $password);
 
-        $query = "SELECT randSalt FROM users";
-        $select_randSalt_query = mysqli_query($connection, $query);
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
 
-        if (!$select_randSalt_query) {
-            die('QUERY FAILED' . mysqli_error($connection));
+        //$query = "SELECT randSalt FROM users";
+        //$select_randSalt_query = mysqli_query($connection, $query);
 
-        }
+        //if (!$select_randSalt_query) {
+        //die('QUERY FAILED' . mysqli_error($connection));
 
-        $row = mysqli_fetch_array($select_randSalt_query);
-        $salt = $row['randSalt'];
-        $password = crypt($password, $salt);
+        //}
+
+        //$row = mysqli_fetch_array($select_randSalt_query);
+        //$salt = $row['randSalt'];
+        //$password = crypt($password, $salt);
 
         $query = "INSERT INTO users (username, user_email, user_password, user_role)";
         $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber')";
@@ -74,7 +76,7 @@ if (isset($_POST['submit'])) {
                         </div>
                          <div class="form-group">
                             <label for="password" class="sr-only">Password</label>
-                            <input type="password" name="password" id="key" class="form-control" placeholder="Password">
+                            <input autocomplete="off" type="password" name="password" id="key" class="form-control" placeholder="Password">
                         </div>
 
                         <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">

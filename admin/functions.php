@@ -1,5 +1,12 @@
 <?php
 
+function escape($string) {
+   
+   global $connection;
+    return mysqli_real_escape_string($connection, trim(strip_tags($string)));
+
+}
+
 function confirmQuery($result)
 {
     global $connection;
@@ -13,7 +20,7 @@ function insert_categories()
 {
     global $connection;
     if (isset($_POST['submit'])) {
-        $cat_title = $_POST['cat_title'];
+        $cat_title = escape($_POST['cat_title']);
         $cat_title = strip_tags($cat_title);
         $cat_title = htmlspecialchars($cat_title);
         if (preg_match("/^[a-zA-Z]+$/", $cat_title)) {
@@ -47,8 +54,8 @@ function findAllcategories()
     $select_categories = mysqli_query($connection, $query);
 
     while ($row = mysqli_fetch_assoc($select_categories)) {
-        $cat_id = $row['cat_id'];
-        $cat_title = $row['cat_title'];
+        $cat_id = escape($row['cat_id']);
+        $cat_title = escape($row['cat_title']);
         echo "<tr>";
         echo "<td>{$cat_id}</td>";
         echo "<td>{$cat_title}</td>";
@@ -63,7 +70,7 @@ function deleteAllcategories()
 {
     global $connection;
     if (isset($_GET['delete'])) {
-        $cat_id_delete = $_GET['delete'];
+        $cat_id_delete = escape($_GET['delete']);
 
         $query = "DELETE FROM categories WHERE cat_id = {$cat_id_delete}";
 

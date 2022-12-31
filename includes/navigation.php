@@ -20,7 +20,7 @@ $query = "SELECT * FROM categories";
 $select_all_categories_query = mysqli_query($connection, $query);
 
 while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
-    $cat_title = $row['cat_title'];
+    $cat_title = escape($row['cat_title']);
     echo "<li><a href='#'>{$cat_title}</a></li>";
 }
 ?>
@@ -40,7 +40,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (isset($_SESSION['user_role'])) {
     if (isset($_GET['p_id'])) {
-        $the_post_id = $_GET['p_id'];
+        $the_post_id = escape($_GET['p_id']);
         echo "<li><a href='/cms2/CMS-Blog-website/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
     }
 }
