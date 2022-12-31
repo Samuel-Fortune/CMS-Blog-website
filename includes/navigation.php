@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -20,7 +21,7 @@ $query = "SELECT * FROM categories";
 $select_all_categories_query = mysqli_query($connection, $query);
 
 while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
-    $cat_title = escape($row['cat_title']);
+    $cat_title = $row['cat_title'];
     echo "<li><a href='#'>{$cat_title}</a></li>";
 }
 ?>

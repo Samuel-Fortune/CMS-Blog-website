@@ -5,8 +5,8 @@ error_reporting(E_ALL);
 include "db.php";?>
 <?php
 if (isset($_POST['login'])) {
-    $username = escape($_POST['username']);
-    $password = escape($_POST['password']);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
     $username = mysqli_real_escape_string($connection, $username);
     $password = mysqli_real_escape_string($connection, $password);
@@ -20,12 +20,12 @@ if (isset($_POST['login'])) {
     }
 
     while ($row = mysqli_fetch_array($select_user_query)) {
-        $db_id = escape($row['user_id']);
-        $db_username = escape($row['username']);
-        $db_user_password = escape($row['user_password']);
-        $db_user_firstname = escape($row['user_firstname']);
-        $db_user_lastname = escape($row['user_lastname']);
-        $db_user_role = escape($row['user_role']);
+        $db_id = $row['user_id'];
+        $db_username = $row['username'];
+        $db_user_password = $row['user_password'];
+        $db_user_firstname = $row['user_firstname'];
+        $db_user_lastname = $row['user_lastname'];
+        $db_user_role = $row['user_role'];
 
     }
     //$password = crypt($password, $db_user_password);

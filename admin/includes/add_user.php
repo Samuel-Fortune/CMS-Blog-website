@@ -63,7 +63,7 @@ if (isset($_POST['create_user'])) {
 
     <div class="form-group">
         <label for="post_content">Password</label>
-        <input type="password" name="user_password" class="form-control" >
+        <input autocomplete="off" type="password" name="user_password" class="form-control" >
     </div>
 
     <div class="form-group">
