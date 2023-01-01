@@ -34,6 +34,10 @@ while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
                         <a href="registration.php">Registration</a>
                     </li>
 
+                    <li>
+                        <a href="contact.php">Contact Us </a>
+                    </li>
+
                     <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -41,7 +45,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (isset($_SESSION['user_role'])) {
     if (isset($_GET['p_id'])) {
-        $the_post_id = escape($_GET['p_id']);
+        $the_post_id = $_GET['p_id'];
         echo "<li><a href='/cms2/CMS-Blog-website/admin/posts.php?source=edit_post&p_id={$the_post_id}'>Edit Post</a></li>";
     }
 }

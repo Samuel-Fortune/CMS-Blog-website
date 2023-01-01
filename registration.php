@@ -1,12 +1,12 @@
 <?php include "includes/db.php";?>
- <?php include "includes/header.php";?>
+<?php include "includes/header.php";?>
 
  <?php
 
 if (isset($_POST['submit'])) {
-    $username = escape($_POST['username']);
-    $email = escape($_POST['email']);
-    $password = escape($_POST['password']);
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
     if (!empty($username) && !empty($email) && !empty($password)) {
 
@@ -15,18 +15,6 @@ if (isset($_POST['submit'])) {
         $password = mysqli_real_escape_string($connection, $password);
 
         $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
-
-        //$query = "SELECT randSalt FROM users";
-        //$select_randSalt_query = mysqli_query($connection, $query);
-
-        //if (!$select_randSalt_query) {
-        //die('QUERY FAILED' . mysqli_error($connection));
-
-        //}
-
-        //$row = mysqli_fetch_array($select_randSalt_query);
-        //$salt = $row['randSalt'];
-        //$password = crypt($password, $salt);
 
         $query = "INSERT INTO users (username, user_email, user_password, user_role)";
         $query .= "VALUES('{$username}', '{$email}', '{$password}', 'subscriber')";
